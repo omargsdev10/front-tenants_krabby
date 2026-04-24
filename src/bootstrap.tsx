@@ -1,5 +1,7 @@
+import './index.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import 'mfe_shared/styles'; // Importamos estilos compartidos (si los hay)
 import TenantsApp from './TenantsApp';
 
 const container = document.getElementById('root');

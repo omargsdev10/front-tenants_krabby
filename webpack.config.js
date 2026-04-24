@@ -20,6 +20,14 @@ module.exports = {
         exclude: /node_modules/,
         //options: { presets: ['@babel/preset-react', '@babel/preset-env'] },
       },
+      {
+        test: /\.css$/i, // Esta regla detecta los archivos .css
+        use: [
+          "style-loader", // Inyecta el JS en el DOM
+          "css-loader",   // Interpreta @import y url()
+          "postcss-loader" // Este es el que activa Tailwind
+        ],
+      }
     ],
   },
   plugins: [
@@ -30,8 +38,11 @@ module.exports = {
         './TenantsIndex': './src/TenantsApp',
       },
       shared: {
-        react: { singleton: true, requiredVersion: '^18.0.0' },
-        'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
+        react: { singleton: true, requiredVersion: '^19.0.0' },
+        'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
+      },
+      remotes: {
+        mfe_shared: 'mfe_shared@http://localhost:3002/remoteEntry.js'
       },
     }),
     new HtmlWebpackPlugin({ 
