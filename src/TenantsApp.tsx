@@ -1,26 +1,23 @@
 import React from 'react';
 
-// Definimos una interfaz para las futuras props (si las tuviera)
-interface TenantsProps {
-  title?: string;
+const ProjectsView = React.lazy(() => import('./features/projects/ProjectsView'));
+
+type View = 'projects';
+
+interface TenantsAppProps {
+  view?: View;
 }
 
-const SharedButton = React.lazy(() => import('mfe_shared/MyButton'));
+const views: Record<View, React.ReactNode> = {
+  projects: (
+    <React.Suspense fallback={<div className="flex justify-center items-center py-10"><span className="loading loading-ring loading-xl" /></div>}>
+      <ProjectsView />
+    </React.Suspense>
+  ),
+};
 
-const TenantsApp: React.FC<TenantsProps> = ({ title = "Módulo de Inquilinos" }) => {
-  return (
-    <div style={{ padding: '20px', border: '2px solid blue' }}>
-      <h2>{title} (TypeScript)</h2>
-      <p>Ahora tienes tipado fuerte y autocompletado profesional.</p>
-      <React.Suspense fallback={<div>Cargando botón...</div>}>
-        <SharedButton 
-          label="¡BOTÓN SIMPLIFICADO!" 
-          onClick={() => alert('¡Funciona sin promesas extra!')} 
-        />
-      </React.Suspense>
-    </div>
-    
-  );
+const TenantsApp: React.FC<TenantsAppProps> = ({ view = 'projects' }) => {
+  return <>{views[view]}</>;
 };
 
 export default TenantsApp;

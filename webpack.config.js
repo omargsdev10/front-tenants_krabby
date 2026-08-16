@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const path = require('path');
+const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
   mode: 'development',
@@ -11,6 +10,9 @@ module.exports = {
   devServer: {
     port: 3001,
     historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   module: {
     rules: [

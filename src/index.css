@@ -1,2 +1,5 @@
-/* Escanea fuentes locales del host */
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
 @source "./**/*.{ts,tsx,html}";
